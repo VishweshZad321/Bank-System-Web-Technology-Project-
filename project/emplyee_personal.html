@@ -1,0 +1,189 @@
+<?php
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "banksystem";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql =("SELECT MAX(Employee_ID) as empid  FROM employee_details");
+$result = mysqli_query($conn, $sql)or die(mysqli_error($conn));
+$row = mysqli_fetch_assoc($result);
+ $empid=$row["empid"]+1;
+
+mysqli_close($conn);
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <title>Employee Personal Details</title>
+    <script>
+        function image(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#image1')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    <style>
+        #btn1
+        {
+            background-color: #a38560;
+            background-image: linear-gradient(315deg, #a38560 0%, #e0d4ae 74%);
+            color:black;
+            padding:5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 13px;
+        }
+        #btn2
+        {
+            background-color: #a38560;
+            background-image: linear-gradient(315deg, #a38560 0%, #e0d4ae 74%);
+            color:black;
+            padding:5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 13px;
+        }
+        #btn3
+        {
+            background-color: #a38560;
+            background-image: linear-gradient(315deg, #a38560 0%, #e0d4ae 74%);
+            color:black;
+            padding:5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 13px;
+        }
+        #btn4
+        {
+            background-color: #a38560;
+            background-image: linear-gradient(315deg, #a38560 0%, #e0d4ae 74%);
+            color:black;
+            padding:5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 13px;
+        }
+        #tableaddress
+        {
+            background-color: #ffffff;
+            background-image: linear-gradient(315deg, #ffffff 0%, #cea177 74%);
+            border-radius:10px ;
+            transform: translate(5%,25%);
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="c_details.css"/>
+</head>
+<body onload="doOnLoad();" bgcolor="#fff8dc">
+<div id="holder"><a><img src="bank1.jpg" width="200px" height="100px"/></a>
+    <div id="header">
+
+        
+        
+        <div id="ab">
+            <br>
+
+<form name="personal" action="empsuccess.php" onsubmit="" method="post" autocomplete="on">
+    <table id="tableaddress" align="center" width="50%" cellspacing="2" cellpadding="15" border="5">
+        <tr>
+            <td colspan="3" align="center" style="font-family: cooper; "><font size="6"><b>Employee Personal Information</b></font></td>
+        </tr>
+        <tr>
+            <td>Employee Id<span style="color:red">*</span></td>
+            <td colspan="2"><input type="text" name="txtempid" value="<?php echo $empid; ?>" size="10"></td>
+
+        </tr>
+        <tr>
+            <td>First Name<span style="color:red">*</span><br><input type="text" name="txtfn" size="30" ></td>
+            <td>Middle Name<span style="color:red">*</span><br><input type="text" name="txtmn" size="30" ></td>
+            <td>Last Name<span style="color:red">*</span><br><input type="text" name="txtln" size="30" ></td>
+        </tr>
+        <tr>
+            <td>Gender<span style="color:red">*</span></td>
+            <td colspan="2"><input type="radio" name="Gender" value="Male" id="m" >MALE <input type="radio" name="Gender" value="Female" id="f">FEMALE</td>
+        </tr>
+        <tr>
+            <td>DOB<span style="color:red">*</span></td>
+            <td colspan="2"><input type="date" name="dated" ></td>
+        </tr>
+        <tr>
+            <td>Mobile Number<span style="color:red">*</span><br><input type="number" name="txtmno" size="30" ></td>
+            <td colspan="2">E-mail<span style="color:red">*</span><br><input type="text" name="txtemailid" size="30" ></td>
+        </tr>
+        <tr>
+            <td>Post<span style="color:red">*</span><br><input type="text" name="txtpost" size="30" ></td>
+            <td>Pan card<span style="color:red">*</span><br><input type="text" name="txtpc" size="30" ></td>
+            <td>Addhar Card<span style="color:red">*</span><br><input type="number" name="txtac" size="30" ></td>
+        </tr>
+       
+    </table>
+	
+	<br>
+	<br>
+	<br>
+	<br>
+	   <table id="tableaddress" align="center" width="50%" cellspacing="2" cellpadding="20" border="5">
+        <tr>
+            <td colspan="3" align="center" style="font-family: cooper; "><font size="6"><b>Employee Address</b></font></td>
+        </tr>
+        <tr>
+            <td colspan="3">Flat No./Plot No.<span style="color:red">*</span><br><input type="text" name="txtflatno" size="10"></td>
+            
+        </tr>
+        <tr>
+            <td>Address<span style="color:red">*</span><br><input type="text" name="txtad" size="30" style="height: 60px;"></td>
+            <td>Street<span style="color:red">*</span><br><input type="text" name="txtst" size="30" ></td>
+            <td>City<span style="color:red">*</span><br><input type="text" name="txtcity" size="30" ></td>
+        </tr>
+        <tr>
+            <td>State<span style="color:red">*</span><br><input type="text" name="txtstate" size="30"></td>
+            <td>Country<span style="color:red">*</span><br><input type="text" name="txtcountry" size="30"></td>
+            <td>Pin Code<span style="color:red">*</span><br><input type="text" name="txtpincode" size="30"></td>
+        </tr>
+        
+    </table>
+	<br>
+	<br>
+	<br>
+	   <table id="tableaddress" align="center" width="50%" cellspacing="2" cellpadding="20" border="5">
+        <tr>
+		<td>Username        :<input type="text" name="txtusername" size="30" required></td>
+        <td colspan="3">Password        :<input type="text" name="txtpassword" size="30" required></td>
+        </tr>  
+		 <tr>
+            <td colspan="3" align="center">
+                <button value="Submit" type="Submit" id="btn1"  style="width:120px; height: 40px;">Submit</button>&nbsp;&nbsp;&nbsp;
+                <button value="Reset" type="Reset" id="btn4" style="width:120px; height: 40px;">Reset</button></td>
+        </tr>
+		</table>
+</form>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+</body>
+</html>
